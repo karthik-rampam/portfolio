@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rampam Karthik | AI/ML Developer Portfolio</title>
+  <meta name="description"
+    content="Portfolio of Rampam Karthik – IT student specializing in AI/ML, building agents, RAG systems, and intelligent automation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">RK<span class="dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#contact" class="nav-cta">Contact</a></li>
+      </ul>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <a href="admin.html" class="admin-nav-btn" title="Admin Panel">⚙️</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu">
+    <ul>
+      <li><a href="#about" class="mobile-link">About</a></li>
+      <li><a href="#experience" class="mobile-link">Experience</a></li>
+      <li><a href="#skills" class="mobile-link">Skills</a></li>
+      <li><a href="#projects" class="mobile-link">Projects</a></li>
+      <li><a href="#education" class="mobile-link">Education</a></li>
+      <li><a href="#certifications" class="mobile-link">Certs</a></li>
+      <li><a href="#contact" class="mobile-link">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- HERO (rendered by render.js) -->
+  <section id="hero">
+    <div id="hero-content-wrap"
+      style="display:flex;align-items:center;justify-content:center;gap:60px;width:100%;max-width:1100px;margin:0 auto;flex-wrap:wrap;">
+    </div>
+    <a href="#about" class="scroll-down" aria-label="Scroll down">
+      <div class="scroll-arrow"></div>
+    </a>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container" id="about-render"></div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container" id="exp-render"></div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container" id="skills-render"></div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container" id="projects-render"></div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="container" id="edu-render"></div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="container" id="certs-render"></div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container" id="contact-render"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <p>Designed & built by <strong id="footer-name">Rampam Karthik</strong> · 2026</p>
+    </div>
+  </footer>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+  <script src="firebase-config.js"></script>
+
+  <!-- Scripts: data first, then render, then animations -->
+  <script src="portfolio-data.js"></script>
+  <script src="render.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

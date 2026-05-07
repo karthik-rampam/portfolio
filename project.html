@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Details | Rampam Karthik</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { padding-top: 80px; }
+    .project-detail-container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; margin-bottom: 30px; font-weight: 500; transition: color 0.2s; }
+    .back-link:hover { color: var(--primary-light); }
+    
+    .proj-detail-header { margin-bottom: 40px; }
+    .proj-detail-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 16px; letter-spacing: -1px; }
+    .proj-detail-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .proj-detail-desc { font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; }
+    
+    .proj-gallery { position: relative; height: 500px; border-radius: var(--radius); overflow: hidden; margin-bottom: 40px; background: #0d1117; border: 1px solid var(--border); }
+    .gallery-slides { width: 100%; height: 100%; position: relative; }
+    .gallery-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 0.6s ease; }
+    .gallery-slide.active { opacity: 1; }
+    
+    .gallery-nav { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 10; background: rgba(0,0,0,0.5); padding: 8px 16px; border-radius: 20px; backdrop-filter: blur(10px); }
+    .gallery-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.3s; }
+    .gallery-dot.active { background: #fff; transform: scale(1.3); }
+    
+    .gallery-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); border: none; color: #fff; font-size: 2rem; width: 48px; height: 48px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; transition: background 0.2s; line-height: 1; }
+    .gallery-arrow:hover { background: rgba(124,58,237,0.8); }
+    .gallery-arrow.prev { left: 20px; }
+    .gallery-arrow.next { right: 20px; }
+    
+    .proj-detail-highlights { margin-bottom: 40px; }
+    .proj-detail-highlights h3 { font-size: 1.5rem; margin-bottom: 20px; color: var(--text); }
+    .proj-detail-highlights ul { list-style: none; }
+    .proj-detail-highlights li { position: relative; padding-left: 24px; margin-bottom: 12px; font-size: 1rem; color: var(--text-muted); line-height: 1.7; }
+    .proj-detail-highlights li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+    .proj-detail-highlights strong { color: var(--text); }
+
+    @media (max-width: 768px) {
+      .proj-gallery { height: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar" class="scrolled">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">RK<span class="dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html#projects">Back to Projects</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- CONTENT (rendered by project.js) -->
+  <div class="project-detail-container" id="project-render">
+    <div style="text-align:center; padding: 100px 0;">Loading project details...</div>
+  </div>
+
+  <footer id="footer">
+    <div class="footer-inner">
+      <p>Designed & built by <strong>Rampam Karthik</strong> · 2025</p>
+    </div>
+  </footer>
+
+  <script src="portfolio-data.js"></script>
+  <script src="project.js"></script>
+</body>
+</html>
