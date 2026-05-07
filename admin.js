@@ -46,6 +46,29 @@ function compressImage(base64Str, maxWidth = 800, quality = 0.7) {
 
 function deepClone(obj) { return JSON.parse(JSON.stringify(obj)); }
 
+// ── FIREBASE STORAGE ───────────────────────────────────────────────────────
+async function uploadToStorage(base64Data, path) {
+  if (typeof firebase === 'undefined') return base64Data;
+  const storageRef = firebase.storage().ref();
+  const fileRef = storageRef.child(path);
+  
+  try {
+    // Convert base64 to Blob
+    const response = await fetch(base64Data);
+    const blob = await response.blob();
+    
+    // Upload
+    const snapshot = await fileRef.put(blob);
+    // Get URL
+    const url = await snapshot.ref.getDownloadURL();
+    console.log("✅ File uploaded to Cloud Storage:", url);
+    return url;
+  } catch (e) {
+    console.error("❌ Cloud Upload failed:", e);
+    return base64Data; // fallback to base64
+  }
+}
+
 // ── LOGIN ──────────────────────────────────────────────────────────────────
 function checkLogin() {
   return sessionStorage.getItem('adminAuth') === '1';
@@ -130,12 +153,16 @@ function populateProfile() {
     if (!file) return;
     const reader = new FileReader();
     reader.onload = async e => {
-      const compressed = await compressImage(e.target.result, 600); // Avatars can be smaller
+      showToast('Uploading photo...', 'info');
+      const compressed = await compressImage(e.target.result, 600);
+      const cloudUrl = await uploadToStorage(compressed, `avatars/${Date.now()}_${file.name}`);
+      
       const arr = JSON.parse($('section-profile').dataset.images || '[]');
-      arr.push(compressed);
+      arr.push(cloudUrl);
       $('section-profile').dataset.images = JSON.stringify(arr);
       refreshAvatarGallery();
       this.value = '';
+      showToast('Photo uploaded!');
     };
     reader.readAsDataURL(file);
   };
@@ -334,10 +361,14 @@ function addSkillCat(s, i) {
     const file = this.files[0]; if(!file) return;
     const reader = new FileReader();
     reader.onload = async e => {
-      const compressed = await compressImage(e.target.result, 100); // Skill icons are very small
-      el.querySelector('.sk-icon').value = '';
-      el.dataset.base64 = compressed;
+      showToast('Uploading icon...', 'info');
+      const compressed = await compressImage(e.target.result, 100);
+      const cloudUrl = await uploadToStorage(compressed, `icons/${Date.now()}_${file.name}`);
+      
+      el.querySelector('.sk-icon').value = cloudUrl;
+      el.dataset.base64 = ''; // No longer using base64
       el.querySelector('h4').textContent = '🖼️ ' + el.querySelector('.sk-cat').value;
+      showToast('Icon uploaded!');
     };
     reader.readAsDataURL(file);
   });
@@ -447,12 +478,16 @@ function addProjectItem(pr, i) {
     const file = this.files[0]; if(!file) return;
     const reader = new FileReader();
     reader.onload = async e => {
-      const compressed = await compressImage(e.target.result, 800);
+      showToast('Uploading project image...', 'info');
+      const compressed = await compressImage(e.target.result, 1000);
+      const cloudUrl = await uploadToStorage(compressed, `projects/${Date.now()}_${file.name}`);
+      
       const arr = JSON.parse(el.dataset.images || '[]');
-      arr.push(compressed);
+      arr.push(cloudUrl);
       el.dataset.images = JSON.stringify(arr);
       refreshProjGallery(el);
       this.value = '';
+      showToast('Project image uploaded!');
     };
     reader.readAsDataURL(file);
   });
